@@ -8,6 +8,8 @@
   <meta name="author" content="Cássio Winkler" />
   <meta name="robots" content="index,follow" />
   <meta name="revisit-after" content="15 days" />
+
+  <!-- Open Graph Tags -->
   <meta property="og:title" content="Cássio Winkler" />
   <meta property="og:description" content="Cássio Winkler" />
   <meta property="og:image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1OTwmOqv8O3k6GqXU49MGzflf2IjQiHAGaQ&s" />
@@ -25,11 +27,11 @@
 
     @media (prefers-color-scheme: dark) {
       :root {
-        --bg: #121212;
-        --text: #eee;
-        --form-bg: #1f1f1f;
-        --input-bg: #2c2c2c;
-        --border: #444;
+        --bg: #1f1f1f;
+        --text: #f0f0f0;
+        --form-bg: #2b2b2b;
+        --input-bg: #3a3a3a;
+        --border: #555;
       }
     }
 
@@ -37,23 +39,20 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: Arial, sans-serif;
     }
 
     body {
       background: var(--bg);
       color: var(--text);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
       padding: 20px;
-      min-height: 100vh;
-      transition: background 0.3s ease, color 0.3s ease;
     }
 
     header {
-      text-align: center;
-      margin-bottom: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
       animation: fadeIn 1s ease;
     }
 
@@ -62,129 +61,143 @@
     }
 
     p.subtitle {
-      font-size: 1rem;
-      color: var(--text);
-      margin-top: 10px;
-      margin-bottom: 20px;
+      margin: 20px 0;
+      font-size: 1.2rem;
+      color: #888;
     }
 
     form {
-      width: 100%;
-      max-width: 500px;
+      max-width: 600px;
+      margin: auto;
       background: var(--form-bg);
       padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      animation: fadeSlide 0.8s ease;
-      transition: background 0.3s ease;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      animation: fadeSlide 0.6s ease;
     }
 
     .input-group {
-      position: relative;
+      display: flex;
+      align-items: center;
       margin-bottom: 15px;
+      background: var(--input-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 8px;
     }
 
     .input-group span {
-      position: absolute;
-      left: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      opacity: 0.6;
+      margin-right: 8px;
+      font-size: 1.2rem;
     }
 
     .input-group input,
     .input-group textarea {
+      border: none;
+      background: transparent;
       width: 100%;
-      padding: 10px 10px 10px 34px;
-      border-radius: 6px;
-      border: 1px solid var(--border);
-      background: var(--input-bg);
       color: var(--text);
-      font-size: 0.95rem;
-      transition: background 0.3s ease, border 0.3s ease;
+      font-size: 1rem;
     }
 
-    .input-group input::placeholder,
-    .input-group textarea::placeholder {
-      color: #888;
+    .input-group textarea {
+      resize: vertical;
     }
 
     button.submit-btn {
       background: #28a745;
       color: #fff;
       border: none;
-      padding: 10px 16px;
-      font-size: 1rem;
+      padding: 10px 20px;
       border-radius: 6px;
       cursor: pointer;
-      transition: background 0.3s ease, transform 0.2s ease;
-      width: 100%;
+      transition: background 0.3s;
     }
 
     button.submit-btn:hover {
       background: #218838;
-      transform: scale(1.02);
     }
 
     .floating-whatsapp {
       position: fixed;
-      bottom: 15px;
-      right: 15px;
+      bottom: 20px;
+      right: 20px;
       background: #25D366;
       border-radius: 50%;
-      width: 55px;
-      height: 55px;
+      width: 60px;
+      height: 60px;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
       cursor: pointer;
-      animation: fadeIn 1.5s ease;
-      z-index: 1000;
+      z-index: 999;
     }
 
     .floating-whatsapp img {
-      width: 28px;
+      width: 30px;
     }
 
-    .whatsapp-form-modal, .modal {
+    footer {
+      margin-top: 50px;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #007bff;
+    }
+
+    .modal {
       display: none;
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0,0,0,0.5);
       align-items: center;
       justify-content: center;
       z-index: 999;
-      animation: fadeIn 0.5s ease;
     }
 
-    .whatsapp-form, .modal-content {
+    .modal-content {
       background: var(--form-bg);
       padding: 20px;
       border-radius: 10px;
-      max-width: 500px;
+      max-width: 600px;
       width: 90%;
-      color: var(--text);
+      animation: fadeSlide 0.4s ease;
     }
 
-    footer {
-      margin-top: 30px;
-      text-align: center;
-      font-size: 0.85rem;
-      color: #888;
-      animation: fadeIn 2s ease;
+    .whatsapp-form-modal {
+      display: none;
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      width: 100%;
+      max-width: 350px;
+      background: none;
+      align-items: flex-end;
+      justify-content: flex-end;
+      z-index: 999;
     }
 
-    footer a {
-      margin: 0 8px;
-      text-decoration: none;
-      color: #aaa;
-      transition: color 0.3s ease;
+    .whatsapp-form {
+      background: var(--form-bg);
+      padding: 15px;
+      border-radius: 12px;
+      width: 100%;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+      animation: fadeSlide 0.4s ease;
     }
 
-    footer a:hover {
-      color: var(--text);
+    @media(max-width: 500px) {
+      .whatsapp-form-modal {
+        right: 10px;
+        bottom: 70px;
+        max-width: 90%;
+      }
     }
 
     @keyframes fadeIn {
@@ -193,27 +206,18 @@
     }
 
     @keyframes fadeSlide {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @media(max-width: 500px) {
-      h1 { font-size: 1.6rem; }
-      p.subtitle { font-size: 0.95rem; }
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
+
   <header>
     <h1>Cássio Winkler</h1>
-    <p class="subtitle">Entre em contato comigo através do formulário abaixo.</p>
   </header>
+
+  <p class="subtitle">Entre em contato comigo através do formulário abaixo.</p>
 
   <form action="https://formspree.io/f/xvgkwvlb" method="POST" onsubmit="showThankYou(event)">
     <div class="input-group">
@@ -234,7 +238,7 @@
     </div>
     <div class="input-group">
       <span>💬</span>
-      <textarea name="mensagem" placeholder="Mensagem" rows="4" required></textarea>
+      <textarea name="mensagem" placeholder="Mensagem" rows="5" required></textarea>
     </div>
     <button type="submit" class="submit-btn">Enviar</button>
   </form>
@@ -264,7 +268,7 @@
         </div>
         <div class="input-group">
           <span>💬</span>
-          <textarea name="mensagem" placeholder="Mensagem" rows="4" required></textarea>
+          <textarea name="mensagem" placeholder="Mensagem" rows="3" required></textarea>
         </div>
         <button type="submit" class="submit-btn">Enviar</button>
       </form>
