@@ -3,56 +3,68 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cássio Winkler</title>
   <meta name="description" content="Cássio Winkler" />
   <meta name="keywords" content="Cássio Winkler" />
   <meta name="author" content="Cássio Winkler" />
   <meta name="robots" content="index,follow" />
   <meta name="revisit-after" content="15 days" />
-
-  <!-- Open Graph Tags -->
   <meta property="og:title" content="Cássio Winkler" />
   <meta property="og:description" content="Cássio Winkler" />
   <meta property="og:image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1OTwmOqv8O3k6GqXU49MGzflf2IjQiHAGaQ&s" />
   <meta property="og:type" content="website" />
-
-  <title>Cássio Winkler</title>
   <style>
     :root {
-      --bg: #f0f0f0;
-      --text: #111;
-      --form-bg: #fff;
-      --input-bg: #fafafa;
-      --border: #ccc;
+      --bg-light: #f0f0f0;
+      --text-light: #111;
+      --form-bg-light: #fff;
+      --input-bg-light: #fafafa;
+      --border-light: #ccc;
+
+      --bg-dark: #1a1a1a;
+      --text-dark: #e0e0e0;
+      --form-bg-dark: #262626;
+      --input-bg-dark: #333;
+      --border-dark: #555;
     }
 
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #1f1f1f;
-        --text: #f0f0f0;
-        --form-bg: #2b2b2b;
-        --input-bg: #3a3a3a;
-        --border: #555;
-      }
+    body.light {
+      --bg: var(--bg-light);
+      --text: var(--text-light);
+      --form-bg: var(--form-bg-light);
+      --input-bg: var(--input-bg-light);
+      --border: var(--border-light);
+    }
+
+    body.dark {
+      --bg: var(--bg-dark);
+      --text: var(--text-dark);
+      --form-bg: var(--form-bg-dark);
+      --input-bg: var(--input-bg-dark);
+      --border: var(--border-dark);
     }
 
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     body {
       background: var(--bg);
       color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       padding: 20px;
+      min-height: 100vh;
+      transition: background 0.3s ease, color 0.3s ease;
     }
 
     header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px;
+      text-align: center;
+      margin-bottom: 15px;
       animation: fadeIn 1s ease;
     }
 
@@ -61,57 +73,61 @@
     }
 
     p.subtitle {
-      margin: 20px 0;
-      font-size: 1.2rem;
-      color: #888;
+      font-size: 1rem;
+      color: var(--text);
+      margin-top: 10px;
+      margin-bottom: 20px;
     }
 
     form {
-      max-width: 600px;
-      margin: auto;
+      width: 100%;
+      max-width: 500px;
       background: var(--form-bg);
       padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      animation: fadeSlide 0.6s ease;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      animation: fadeSlide 0.8s ease;
     }
 
     .input-group {
-      display: flex;
-      align-items: center;
+      position: relative;
       margin-bottom: 15px;
-      background: var(--input-bg);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 8px;
     }
 
     .input-group span {
-      margin-right: 8px;
-      font-size: 1.2rem;
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0.6;
     }
 
     .input-group input,
     .input-group textarea {
-      border: none;
-      background: transparent;
       width: 100%;
+      padding: 10px 10px 10px 34px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--input-bg);
       color: var(--text);
-      font-size: 1rem;
+      font-size: 0.95rem;
     }
 
-    .input-group textarea {
-      resize: vertical;
+    .input-group input::placeholder,
+    .input-group textarea::placeholder {
+      color: #888;
     }
 
     button.submit-btn {
       background: #28a745;
       color: #fff;
       border: none;
-      padding: 10px 20px;
+      padding: 10px 16px;
+      font-size: 1rem;
       border-radius: 6px;
       cursor: pointer;
-      transition: background 0.3s;
+      width: 100%;
+      transition: background 0.3s ease;
     }
 
     button.submit-btn:hover {
@@ -120,84 +136,67 @@
 
     .floating-whatsapp {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
+      bottom: 15px;
+      right: 15px;
       background: #25D366;
       border-radius: 50%;
-      width: 60px;
-      height: 60px;
+      width: 55px;
+      height: 55px;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.4);
       cursor: pointer;
-      z-index: 999;
+      z-index: 1000;
     }
 
     .floating-whatsapp img {
-      width: 30px;
-    }
-
-    footer {
-      margin-top: 50px;
-      text-align: center;
-      font-size: 0.9rem;
-    }
-
-    footer a {
-      margin: 0 10px;
-      text-decoration: none;
-      color: #007bff;
-    }
-
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.5);
-      align-items: center;
-      justify-content: center;
-      z-index: 999;
-    }
-
-    .modal-content {
-      background: var(--form-bg);
-      padding: 20px;
-      border-radius: 10px;
-      max-width: 600px;
-      width: 90%;
-      animation: fadeSlide 0.4s ease;
+      width: 28px;
     }
 
     .whatsapp-form-modal {
       display: none;
       position: fixed;
       bottom: 80px;
-      right: 20px;
-      width: 100%;
-      max-width: 350px;
-      background: none;
-      align-items: flex-end;
-      justify-content: flex-end;
+      right: 15px;
       z-index: 999;
     }
 
     .whatsapp-form {
       background: var(--form-bg);
-      padding: 15px;
-      border-radius: 12px;
-      width: 100%;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-      animation: fadeSlide 0.4s ease;
+      padding: 20px;
+      border-radius: 10px;
+      width: 320px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     }
 
-    @media(max-width: 500px) {
-      .whatsapp-form-modal {
-        right: 10px;
-        bottom: 70px;
-        max-width: 90%;
-      }
+    footer {
+      margin-top: 30px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #888;
+      animation: fadeIn 2s ease;
+    }
+
+    footer a {
+      margin: 0 8px;
+      text-decoration: none;
+      color: #aaa;
+    }
+
+    footer a:hover {
+      color: var(--text);
+    }
+
+    .theme-toggle {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      background: transparent;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text);
     }
 
     @keyframes fadeIn {
@@ -206,70 +205,51 @@
     }
 
     @keyframes fadeSlide {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media(max-width: 500px) {
+      h1 { font-size: 1.6rem; }
+      p.subtitle { font-size: 0.95rem; }
     }
   </style>
 </head>
 <body>
+  <button class="theme-toggle" onclick="toggleTheme()" title="Alternar tema">🌓</button>
 
   <header>
     <h1>Cássio Winkler</h1>
+    <p class="subtitle">Entre em contato comigo através do formulário abaixo.</p>
   </header>
 
-  <p class="subtitle">Entre em contato comigo através do formulário abaixo.</p>
-
   <form action="https://formspree.io/f/xvgkwvlb" method="POST" onsubmit="showThankYou(event)">
-    <div class="input-group">
-      <span>👤</span>
-      <input type="text" name="nome" placeholder="Nome" required />
-    </div>
-    <div class="input-group">
-      <span>📱</span>
-      <input type="tel" name="telefone" placeholder="Telefone / WhatsApp" required />
-    </div>
-    <div class="input-group">
-      <span>📧</span>
-      <input type="email" name="email" placeholder="E-mail" required />
-    </div>
-    <div class="input-group">
-      <span>📝</span>
-      <input type="text" name="assunto" placeholder="Assunto" required />
-    </div>
-    <div class="input-group">
-      <span>💬</span>
-      <textarea name="mensagem" placeholder="Mensagem" rows="5" required></textarea>
-    </div>
+    <div class="input-group"><span>👤</span><input type="text" name="nome" placeholder="Nome" required /></div>
+    <div class="input-group"><span>📱</span><input type="tel" name="telefone" placeholder="Telefone / WhatsApp" required /></div>
+    <div class="input-group"><span>📧</span><input type="email" name="email" placeholder="E-mail" required /></div>
+    <div class="input-group"><span>📝</span><input type="text" name="assunto" placeholder="Assunto" required /></div>
+    <div class="input-group"><span>💬</span><textarea name="mensagem" placeholder="Mensagem" rows="4" required></textarea></div>
     <button type="submit" class="submit-btn">Enviar</button>
   </form>
 
-  <div class="floating-whatsapp" onclick="document.getElementById('whatsappForm').style.display='flex'">
+  <div class="floating-whatsapp" onclick="toggleWhatsAppForm()">
     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
   </div>
 
-  <div id="whatsappForm" class="whatsapp-form-modal" onclick="this.style.display='none'">
-    <div class="whatsapp-form" onclick="event.stopPropagation()">
+  <div id="whatsappForm" class="whatsapp-form-modal">
+    <div class="whatsapp-form">
       <form action="https://formspree.io/f/xvgkwvlb" method="POST" onsubmit="showThankYou(event)">
-        <div class="input-group">
-          <span>👤</span>
-          <input type="text" name="nome" placeholder="Nome" required />
-        </div>
-        <div class="input-group">
-          <span>📱</span>
-          <input type="tel" name="telefone" placeholder="Telefone / WhatsApp" required />
-        </div>
-        <div class="input-group">
-          <span>📧</span>
-          <input type="email" name="email" placeholder="E-mail" required />
-        </div>
-        <div class="input-group">
-          <span>📝</span>
-          <input type="text" name="assunto" placeholder="Assunto" required />
-        </div>
-        <div class="input-group">
-          <span>💬</span>
-          <textarea name="mensagem" placeholder="Mensagem" rows="3" required></textarea>
-        </div>
+        <div class="input-group"><span>👤</span><input type="text" name="nome" placeholder="Nome" required /></div>
+        <div class="input-group"><span>📱</span><input type="tel" name="telefone" placeholder="Telefone / WhatsApp" required /></div>
+        <div class="input-group"><span>📧</span><input type="email" name="email" placeholder="E-mail" required /></div>
+        <div class="input-group"><span>📝</span><input type="text" name="assunto" placeholder="Assunto" required /></div>
+        <div class="input-group"><span>💬</span><textarea name="mensagem" placeholder="Mensagem" rows="4" required></textarea></div>
         <button type="submit" class="submit-btn">Enviar</button>
       </form>
     </div>
@@ -286,6 +266,27 @@
       alert("Obrigado! Darei um retorno assim que possível.");
       event.target.submit();
     }
+
+    function toggleWhatsAppForm() {
+      const modal = document.getElementById('whatsappForm');
+      modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+    }
+
+    function toggleTheme() {
+      const body = document.body;
+      const currentTheme = body.classList.contains('dark') ? 'dark' : 'light';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      body.classList.remove(currentTheme);
+      body.classList.add(newTheme);
+      localStorage.setItem('theme', newTheme);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const savedTheme = localStorage.getItem('theme');
+      const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+      document.body.classList.add(theme);
+    });
   </script>
 </body>
 </html>
