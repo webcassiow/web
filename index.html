@@ -13,35 +13,22 @@
   <meta property="og:description" content="Cássio Winkler" />
   <meta property="og:image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1OTwmOqv8O3k6GqXU49MGzflf2IjQiHAGaQ&s" />
   <meta property="og:type" content="website" />
+
   <style>
     :root {
-      --bg-light: #f0f0f0;
-      --text-light: #111;
-      --form-bg-light: #fff;
-      --input-bg-light: #fafafa;
-      --border-light: #ccc;
-
-      --bg-dark: #1a1a1a;
-      --text-dark: #e0e0e0;
-      --form-bg-dark: #262626;
-      --input-bg-dark: #333;
-      --border-dark: #555;
-    }
-
-    body.light {
-      --bg: var(--bg-light);
-      --text: var(--text-light);
-      --form-bg: var(--form-bg-light);
-      --input-bg: var(--input-bg-light);
-      --border: var(--border-light);
+      --bg: #f0f0f0;
+      --text: #111;
+      --form-bg: #fff;
+      --input-bg: #fafafa;
+      --border: #ccc;
     }
 
     body.dark {
-      --bg: var(--bg-dark);
-      --text: var(--text-dark);
-      --form-bg: var(--form-bg-dark);
-      --input-bg: var(--input-bg-dark);
-      --border: var(--border-dark);
+      --bg: #1a1a1a;
+      --text: #eee;
+      --form-bg: #2a2a2a;
+      --input-bg: #333;
+      --border: #555;
     }
 
     * {
@@ -60,6 +47,23 @@
       padding: 20px;
       min-height: 100vh;
       transition: background 0.3s ease, color 0.3s ease;
+      position: relative;
+    }
+
+    .theme-toggle {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      font-size: 1.5rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 1001;
+      transition: transform 0.2s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.1);
     }
 
     header {
@@ -87,6 +91,7 @@
       border-radius: 12px;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
       animation: fadeSlide 0.8s ease;
+      transition: background 0.3s ease;
     }
 
     .input-group {
@@ -111,6 +116,7 @@
       background: var(--input-bg);
       color: var(--text);
       font-size: 0.95rem;
+      transition: background 0.3s ease, border 0.3s ease;
     }
 
     .input-group input::placeholder,
@@ -126,12 +132,13 @@
       font-size: 1rem;
       border-radius: 6px;
       cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
       width: 100%;
-      transition: background 0.3s ease;
     }
 
     button.submit-btn:hover {
       background: #218838;
+      transform: scale(1.02);
     }
 
     .floating-whatsapp {
@@ -147,6 +154,7 @@
       justify-content: center;
       box-shadow: 0 2px 10px rgba(0,0,0,0.4);
       cursor: pointer;
+      animation: fadeIn 1.5s ease;
       z-index: 1000;
     }
 
@@ -159,15 +167,19 @@
       position: fixed;
       bottom: 80px;
       right: 15px;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 10px;
+      border-radius: 10px;
       z-index: 999;
+      animation: fadeIn 0.5s ease;
     }
 
     .whatsapp-form {
       background: var(--form-bg);
-      padding: 20px;
+      padding: 15px;
       border-radius: 10px;
-      width: 320px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      max-width: 320px;
+      color: var(--text);
     }
 
     footer {
@@ -182,20 +194,10 @@
       margin: 0 8px;
       text-decoration: none;
       color: #aaa;
+      transition: color 0.3s ease;
     }
 
     footer a:hover {
-      color: var(--text);
-    }
-
-    .theme-toggle {
-      position: fixed;
-      top: 15px;
-      right: 15px;
-      background: transparent;
-      border: none;
-      font-size: 1.5rem;
-      cursor: pointer;
       color: var(--text);
     }
 
@@ -222,7 +224,7 @@
   </style>
 </head>
 <body>
-  <button class="theme-toggle" onclick="toggleTheme()" title="Alternar tema">🌓</button>
+  <button class="theme-toggle" onclick="toggleTheme()" title="Alternar tema">🌙</button>
 
   <header>
     <h1>Cássio Winkler</h1>
@@ -238,7 +240,7 @@
     <button type="submit" class="submit-btn">Enviar</button>
   </form>
 
-  <div class="floating-whatsapp" onclick="toggleWhatsAppForm()">
+  <div class="floating-whatsapp" onclick="toggleWhatsappForm()">
     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
   </div>
 
@@ -264,29 +266,44 @@
     function showThankYou(event) {
       event.preventDefault();
       alert("Obrigado! Darei um retorno assim que possível.");
-      event.target.submit();
+      const form = event.target;
+      const data = new FormData(form);
+      fetch(form.action, {
+        method: form.method,
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      }).then(response => {
+        if (response.ok) {
+          form.reset();
+        } else {
+          alert("Erro ao enviar. Tente novamente.");
+        }
+      }).catch(() => {
+        alert("Erro ao enviar. Verifique sua conexão.");
+      });
     }
 
-    function toggleWhatsAppForm() {
-      const modal = document.getElementById('whatsappForm');
-      modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+    function toggleWhatsappForm() {
+      const form = document.getElementById('whatsappForm');
+      form.style.display = (form.style.display === 'flex') ? 'none' : 'flex';
     }
 
     function toggleTheme() {
       const body = document.body;
-      const currentTheme = body.classList.contains('dark') ? 'dark' : 'light';
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      body.classList.remove(currentTheme);
-      body.classList.add(newTheme);
-      localStorage.setItem('theme', newTheme);
+      const btn = document.querySelector(".theme-toggle");
+      body.classList.toggle("dark");
+      const dark = body.classList.contains("dark");
+      btn.textContent = dark ? "☀️" : "🌙";
+      localStorage.setItem("theme", dark ? "dark" : "light");
     }
 
-    window.addEventListener('DOMContentLoaded', () => {
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const savedTheme = localStorage.getItem('theme');
-      const theme = savedTheme || (prefersDark ? 'dark' : 'light');
-      document.body.classList.add(theme);
-    });
+    window.onload = () => {
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "dark") {
+        document.body.classList.add("dark");
+        document.querySelector(".theme-toggle").textContent = "☀️";
+      }
+    }
   </script>
 </body>
 </html>
