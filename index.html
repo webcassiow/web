@@ -25,8 +25,8 @@
     }
 
     body {
-      background: linear-gradient(135deg, #e0f7fa, #fff);
-      color: #333;
+      background: linear-gradient(135deg, #111, #333);
+      color: #eee;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -41,32 +41,38 @@
 
     h1 {
       font-size: 2.5rem;
-      color: #007bff;
+      color: #fff;
       margin-bottom: 10px;
     }
 
     p.subtitle {
       font-size: 1.2rem;
-      color: #555;
+      color: #bbb;
       margin-bottom: 30px;
     }
 
     form {
       width: 100%;
       max-width: 600px;
-      background: #fff;
+      background: #1f1f1f;
       padding: 25px;
       border-radius: 15px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
     }
 
     input, textarea {
       width: 100%;
       padding: 12px;
       margin-bottom: 15px;
-      border: 1px solid #ccc;
+      border: 1px solid #444;
       border-radius: 8px;
+      background-color: #2c2c2c;
+      color: #fff;
       font-size: 1rem;
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: #aaa;
     }
 
     button.submit-btn {
@@ -95,7 +101,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.4);
       cursor: pointer;
     }
 
@@ -108,36 +114,37 @@
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(0, 0, 0, 0.6);
       align-items: center;
       justify-content: center;
       z-index: 1000;
     }
 
     .whatsapp-form, .modal-content {
-      background: white;
+      background: #2a2a2a;
       padding: 25px;
       border-radius: 12px;
       max-width: 600px;
       width: 90%;
+      color: #fff;
     }
 
     footer {
       margin-top: 50px;
       text-align: center;
       font-size: 0.9rem;
+      color: #aaa;
     }
 
     footer a {
       margin: 0 10px;
       text-decoration: none;
-      color: #007bff;
+      color: #ccc;
+      transition: color 0.3s ease;
     }
 
-    .qrcode {
-      display: block;
-      margin: 30px auto 0;
-      max-width: 150px;
+    footer a:hover {
+      color: #fff;
     }
 
     @media(max-width: 600px) {
@@ -183,7 +190,6 @@
   <footer>
     <a href="https://wr.eti.br" target="_blank">🌐 wr.eti.br</a>
     <a href="mailto:cassio@wr.eti.br">✉️ cassio@wr.eti.br</a>
-    <img class="qrcode" src="https://api.qrserver.com/v1/create-qr-code/?data=mailto:cassio@wr.eti.br&size=150x150" alt="QR Code Email" />
   </footer>
 
   <script>
