@@ -21,71 +21,67 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     body {
-      background: #f9f9f9;
+      background: linear-gradient(135deg, #e0f7fa, #fff);
       color: #333;
-      padding: 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
     }
 
     header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px;
-    }
-
-    .curriculo-btn {
-      background: #007bff;
-      color: #fff;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .curriculo-btn:hover {
-      background: #0056b3;
+      text-align: center;
+      margin-bottom: 20px;
     }
 
     h1 {
-      font-size: 2rem;
+      font-size: 2.5rem;
+      color: #007bff;
       margin-bottom: 10px;
     }
 
     p.subtitle {
-      margin-bottom: 30px;
       font-size: 1.2rem;
-      color: #666;
+      color: #555;
+      margin-bottom: 30px;
     }
 
     form {
+      width: 100%;
       max-width: 600px;
-      margin: auto;
       background: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     }
 
     input, textarea {
       width: 100%;
+      padding: 12px;
       margin-bottom: 15px;
-      padding: 10px;
-      border-radius: 6px;
       border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
     }
 
     button.submit-btn {
       background: #28a745;
       color: #fff;
       border: none;
-      padding: 10px 20px;
-      border-radius: 6px;
+      padding: 12px 20px;
+      font-size: 1rem;
+      border-radius: 8px;
       cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button.submit-btn:hover {
+      background: #218838;
     }
 
     .floating-whatsapp {
@@ -107,6 +103,25 @@
       width: 30px;
     }
 
+    .whatsapp-form-modal, .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .whatsapp-form, .modal-content {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      max-width: 600px;
+      width: 90%;
+    }
+
     footer {
       margin-top: 50px;
       text-align: center;
@@ -119,44 +134,25 @@
       color: #007bff;
     }
 
-    .modal, .whatsapp-form-modal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.5);
-      align-items: center;
-      justify-content: center;
-    }
-
-    .modal-content, .whatsapp-form {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      max-width: 600px;
-      width: 90%;
-    }
-
     .qrcode {
       display: block;
-      margin: 30px auto;
+      margin: 30px auto 0;
       max-width: 150px;
     }
 
     @media(max-width: 600px) {
-      h1 { font-size: 1.5rem; }
-      .curriculo-btn { padding: 8px 15px; font-size: 0.9rem; }
-      input, textarea { font-size: 0.9rem; }
+      h1 { font-size: 1.8rem; }
+      p.subtitle { font-size: 1rem; }
+      button.submit-btn { font-size: 0.95rem; }
+      input, textarea { font-size: 0.95rem; }
     }
   </style>
 </head>
 <body>
   <header>
     <h1>Cássio Winkler</h1>
-    <button class="curriculo-btn" onclick="document.getElementById('curriculoModal').style.display='flex'">Currículo</button>
+    <p class="subtitle">Entre em contato comigo através do formulário abaixo.</p>
   </header>
-
-  <p class="subtitle">Entre em contato comigo através do formulário abaixo.</p>
 
   <form action="https://formspree.io/f/xvgkwvlb" method="POST" onsubmit="showThankYou(event)">
     <input type="text" name="nome" placeholder="Nome" required />
@@ -189,18 +185,6 @@
     <a href="mailto:cassio@wr.eti.br">✉️ cassio@wr.eti.br</a>
     <img class="qrcode" src="https://api.qrserver.com/v1/create-qr-code/?data=mailto:cassio@wr.eti.br&size=150x150" alt="QR Code Email" />
   </footer>
-
-  <div id="curriculoModal" class="modal" onclick="this.style.display='none'">
-    <div class="modal-content" onclick="event.stopPropagation()">
-      <h2>Currículo</h2>
-      <p><strong>Nome:</strong> Cássio Winkler</p>
-      <p><strong>Email:</strong> cassio@wr.eti.br</p>
-      <p><strong>Telefone:</strong> (00) 00000-0000</p>
-      <p><strong>Experiência:</strong> Desenvolvedor Web com experiência em projetos de scraping, automação e monitoramento de dados.</p>
-      <p><strong>Habilidades:</strong> HTML, CSS, JavaScript, Python, Web Scraping, Integrações com APIs, SEO</p>
-      <p><strong>Formação:</strong> Bacharel em Ciência da Computação</p>
-    </div>
-  </div>
 
   <script>
     function showThankYou(event) {
